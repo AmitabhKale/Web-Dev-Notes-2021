@@ -40,6 +40,30 @@ Important parts of a response:
 
 ---
 
+## Command Line
+
+Note: Still not sure what to use: cmd, powershell, gitbash or WSL or even Babun (possibly with ConEmu)
+
+- ls shows all of the contents of the current folder we're inside of
+    - ``ls dirname`` to see the contents of specific folder
+- cd is used to change directories
+    - ``cd ..`` to go back one level
+    - you can start writing the name of a directory and hit tab to autocomplete it
+- touch is used to create new files
+    - ``touch orange.txt``
+- mkdir is used to create a new folder
+    - ``mkdir FavColors``
+- rm is used to delete a specific file
+    - ``rm orange.txt``
+- rm -rf allows us to remove entire directories
+    - ``rm -rf colors/``
+    - ``rm -rf /`` deletes everything!
+    - -rf is a flag, a way to change what the command does
+        - stands for 'recursive force'
+
+---
+
+
 ## Node.js
 
 ### What Is Node.js
@@ -61,4 +85,23 @@ $node
 >'hello world'
 # Ctrl+C twice to exit
 $node hello.js
+```
+It is called REPL - Read-Evaluate-Print Loop - is a simple, interactive computer programming environment that takes single user inputs (i.e., single expressions), evaluates them, and returns the result to the user
+- exists in many server side languages, e.g. in ruby
+
+### NPM
+
+NPM stands for Node Package Manager; it is a way to include 'libraries' when we write server-side JS
+
+To install a package (the list could be found at npmjs.com):
+
+```bash
+$npm install <package name>
+# npm install <package name>@version
+```
+
+To include a package:
+
+```javascript
+var cat = require('cat-me'); // cat-me is the name of a package
 ```
