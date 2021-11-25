@@ -1,0 +1,37 @@
+# Topics 
+
+## Contents
+
+- [Middleware](middleware)
+  - [morgan](morgan)
+
+
+# Middleware
+Express Middleware are function that run during the request/response LifeCycle
+- Middleware are just Functions
+- Each Middleware has access to the request and response objects
+- Middleware can end with the HTTP request by sending back a response with methods like res.send()
+- OR middleware can br chained together,one after another by calling next()
+
+## Using Morgan-Logger Middleware
+In Basic Express Server App Install the morgan package
+
+```
+npm i morgan
+```
+
+Example: This will output a log 
+```
+var express = require('express')
+var morgan = require('morgan')
+
+var app = express()
+
+app.use(morgan('tiny'))
+
+app.get('/', function (req, res) {
+  res.send('hello, world!')
+})
+```
+
+
