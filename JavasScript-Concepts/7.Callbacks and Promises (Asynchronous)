@@ -1,0 +1,114 @@
+### Contents
+
+- [Callbacks](#callbacks)
+- [Promises](#promises)
+
+
+# Callbacks
+- A callback is a function passed as an argument to another function.
+
+``Note  :`` JavaScript functions are executed in the sequence they are called. Not in the sequence they are defined. Below code is example of synchronous Programming.
+```javascript
+const posts = [
+    {title:'Post one', body:'This is Post one'},
+    {title:'Post Two', body:'This is Post Two'}
+]
+
+function getPosts(){
+    setTimeout(() => {
+        let output = ''
+        posts.forEach((post) => {
+            output += `<li>${post.title}</li>`;
+        } )
+        document.body.innerHTML = output
+    },1000)
+}
+
+function createPost(post){
+    setTimeout(() => {
+        posts.push(post)
+    },2000)
+}
+
+getPosts()
+createPost( {title:'Post Three', body:'This is Post Three'})
+
+```
+
+The reason we are not gettting post 3 is createpost(2s) is taking much time than getposts(1s)
+thats why the asynchronous programming comes in as functions are exceuted in sequence.
+
+
+### using callback
+```javascript
+const posts = [
+    {title:'Post one', body:'This is Post one'},
+    {title:'Post Two', body:'This is Post Two'}
+]
+
+function getPosts(){
+    setTimeout(() => {
+        let output = ''
+        posts.forEach((post) => {
+            output += `<li>${post.title}</li>`;
+        } )
+        document.body.innerHTML = output
+    },1000)
+}
+
+function createPost(post, callback){
+    setTimeout(() => {
+        posts.push(post)
+        callback();
+    },2000)
+}
+
+
+createPost( {title:'Post Three', body:'This is Post Three'},getPosts)
+```
+Here we will get 3 li as output.
+
+### Asynchrounous
+Functions running in parallel with other functions are called asynchronous.
+
+### Promises
+"Producing code" is code that can take some time
+
+"Consuming code" is code that must wait for the result
+
+A Promise is a JavaScript object that links producing code and consuming code
+
+```javascript
+const posts = [
+    {title:'Post one', body:'This is Post one'},
+    {title:'Post Two', body:'This is Post Two'}
+]
+
+function getPosts(){
+    setTimeout(() => {
+        let output = ''
+        posts.forEach((post) => {
+            output += `<li>${post.title}</li>`;
+        } )
+        document.body.innerHTML = output
+    },1000)
+}
+
+function createPost(post){
+    return new Promise((resolve,reject) => {
+        setTimeout(() => {
+            posts.push(post)
+            const error = true;
+            if(!error){
+                resolve();
+            }else{
+                reject('Error: Something went Wrong')
+            }
+        },2000)
+    })   
+}
+
+createPost( {title:'Post Three', body:'This is Post Three'})
+.then(getPosts)
+.catch(err => console.log(err));
+```
